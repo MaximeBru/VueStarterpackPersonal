@@ -1,0 +1,52 @@
+{
+    "name": "vuejsstarter",
+    "version": "1.0.0",
+    "description": "a personal starter template for vue",
+    "author": "Maxime Bru",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint"
+    },
+    "dependencies": {
+        "axios": "0.19.2",
+        "express": "^4.17.1",
+        "vue": "2.6.11",
+        "vue-router": "3.1.5",
+        "vuex": "3.1.2"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "4.2.2",
+        "@vue/cli-plugin-eslint": "4.2.2",
+        "@vue/cli-service": "4.2.2",
+        "babel-eslint": "^10.0.3",
+        "eslint": "^6.8.0",
+        "eslint-plugin-vue": "^6.1.2",
+        "vue-template-compiler": "^2.6.11"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "eslint:recommended"
+        ],
+        "rules": {},
+        "parserOptions": {
+            "parser": "babel-eslint"
+        }
+    },
+    "postcss": {
+        "plugins": {
+            "autoprefixer": {}
+        }
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
+    ]
+}
