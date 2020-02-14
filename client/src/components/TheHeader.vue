@@ -1,6 +1,6 @@
 <template>
 <div class="container-header d-flex w-100 flex-row justify-content-center align-items-center p-3">
-  <router-link to="/">Dyma</router-link>
+  <router-link to="/">Template Auth app</router-link>
   <div class="flex-fill"></div>
   <div v-if="!jwtToken && isLoggedIn === false" class="d-flex flex-row">
     <router-link to="/signin" class="mr-2">Connexion</router-link>
