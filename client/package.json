@@ -12,7 +12,9 @@
     "dependencies": {
         "axios": "0.19.2",
         "express": "^4.17.1",
+        "lodash": "^4.17.15",
         "vue": "2.6.11",
+        "vue-resource": "^1.5.1",
         "vue-router": "3.1.5",
         "vuex": "3.1.2"
     },
@@ -35,7 +37,8 @@
             "eslint:recommended"
         ],
         "rules": {
-            "no-console": "off"
+            "no-console": "off",
+            "no-useless-escape": "off"
         },
         "parserOptions": {
             "parser": "babel-eslint"

@@ -9,7 +9,7 @@ const user = {
     namespaced: true,
     state: {
         data: {},
-        isLoading: false,
+        isLoading: true,
         isLoggedIn: null,
         jwtToken: null,
         errors: []
