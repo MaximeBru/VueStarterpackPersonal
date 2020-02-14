@@ -9,19 +9,30 @@ const user = {
     namespaced: true,
     state: {
         data: {},
-        isLoading: true,
-        isLoggedIn: null,
-        jwtToken: null,
+        isLoading: false,
+        isLoggedIn: localStorage.getItem("jwtToken") ? null : false,
+        jwtToken: localStorage.getItem("jwtToken"),
         errors: []
     },
     getters: {
-        isLoading: state => state.isLoading,
         isLoggedIn: state => state.isLoggedIn,
+        isLoading: state => state.isLoading,
         errors: state => state.errors,
         currentUser: state => state.data,
         jwtToken: state => state.jwtToken
     },
     actions: {
+        async refreshToken(context) {
+            try {
+                const response = await axios.get("/api/auth/refresh-token");
+                setTimeout(() => {
+                    context.dispatch("refreshToken");
+                }, 14 * 60 * 1000);
+                context.commit("refreshTokenSuccess", response.data);
+            } catch (err) {
+                context.commit("refreshTokenError");
+            }
+        },
         async trySignin(context, credentials) {
             try {
                 context.commit("updateIsLoading", true);
@@ -53,6 +64,18 @@ const user = {
         }
     },
     mutations: {
+        refreshTokenError(state) {
+            state.data = null;
+            state.isLoggedIn = false;
+            state.jwtToken = null;
+            localStorage.removeItem("jwtToken");
+        },
+        refreshTokenSuccess(state, data) {
+            state.data = data.user;
+            state.isLoggedIn = true;
+            state.jwtToken = data.jwtToken;
+            localStorage.setItem("jwtToken", data.jwtToken);
+        },
         updateIsLoading(state, isLoading) {
             state.isLoading = isLoading;
         },
@@ -68,11 +91,16 @@ const user = {
             state.isLoading = false;
             state.errors = [];
             state.isLoggedIn = true;
+            delete data.user.password;
             state.data = data.user;
             state.jwtToken = data.jwtToken;
+            localStorage.setItem("jwtToken", data.jwtToken);
         },
         signOut(state) {
             state.jwtToken = null;
+            state.data = null;
+            state.isLoggedIn = false;
+            localStorage.removeItem("jwtToken");
         },
         fetchCurrentUserSuccess(state, user) {
             state.data = user;
